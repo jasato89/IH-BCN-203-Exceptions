@@ -2,9 +2,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
-         /*
+
         //Checked Exceptions - Unchecked Exceptions
 
         //Checked Exception
@@ -17,21 +17,23 @@ public class Main {
 
         //Unchecked exceptions
 
-        /*
 
         int[] numbers = {2, 5, 7, 8, 10};
 
+        //Crash
+        /*
+        
         for(int i = 0; i < 14; i++) {
 
             System.out.println(numbers[i]);
 
         }
+         */
 
         System.out.println("Hola qué tal");
 
-         */
 
-        int[] numbers = {2, 5, 7, 8, 10};
+        //int[] numbers2 = {2, 5, 7, 8, 10};
 
         // printArray(numbers);
 
@@ -39,7 +41,7 @@ public class Main {
 
         //printArray(numbers2);
 
-        printArrayManagingExceptions(numbers);
+        //printArrayManagingExceptions(numbers);
 
         System.out.println("==========");
 
@@ -48,20 +50,48 @@ public class Main {
         System.out.println(convertToInt("16"));
         System.out.println(convertToInt("Hola"));
 
-       int i;
+        int i;
+
+        i = convertToIntWithThrows("Hola");
+
 
         try {
-            i = convertToIntWithThrows("Hola");
-
+            System.out.println(concat(" ", " "));
+        } catch (IllegalArgumentException e) {
+            System.err.println("Alguna de las cadenas está vacía o son nulas");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Error");
-            i = 12;
+            System.err.println("Alguna de las cadenas está vacía o son nulas");
+            e.printStackTrace();
         }
 
+        System.out.println(Integer.MAX_VALUE);
+
+        int i2;
+        int x = 2000000000;
+        int y = 2000000000;
+
         try {
-            FileWriter writer = new FileWriter("hola.json");
-        } catch (IOException e) {
-            e.printStackTrace();
+            i2 = multiply(x, y);
+            System.out.println(i2);
+        } catch (Exception e) {
+            System.err.println("Números demasiado grandes para int, se muestra la multiplicación en Long");
+            System.out.println((long) x * (long) y);
+        } finally {
+            i2 = 0;
+        }
+
+        System.out.println(i2);
+
+
+    }
+
+    public static int multiply(int x, int y) throws Exception {
+        int result = x * y;
+        if (result / x != y) {
+            throw new IllegalArgumentException();
+        } else {
+            return result;
         }
 
 
@@ -107,8 +137,17 @@ public class Main {
         return result;
     }
 
-    public static int convertToIntWithThrows(String number) throws Exception {
+    public static int convertToIntWithThrows(String number) throws NullPointerException {
         return Integer.parseInt(number);
     }
 
+    public static String concat(String str1, String str2) throws IllegalArgumentException, Exception {
+
+        if (str1 == null || str2 == null || str1.isEmpty() || str2.isEmpty() || str1.equals(" ") || str2.equals(" ")) {
+            throw new IllegalArgumentException();
+        } else {
+            return str1.concat(str2);
+        }
+
+    }
 }
