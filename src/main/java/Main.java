@@ -1,9 +1,11 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+/*
 
         //Checked Exceptions - Unchecked Exceptions
 
@@ -21,14 +23,14 @@ public class Main {
         int[] numbers = {2, 5, 7, 8, 10};
 
         //Crash
-        /*
-        
+
+
         for(int i = 0; i < 14; i++) {
 
             System.out.println(numbers[i]);
 
         }
-         */
+
 
         System.out.println("Hola qué tal");
 
@@ -82,6 +84,32 @@ public class Main {
         }
 
         System.out.println(i2);
+ */
+
+        Account account = new Account();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Introduce tu nombre");
+        account.setName(input.nextLine());
+        System.out.println("Introduce tu balance");
+
+        double b = input.nextDouble();
+
+        while (b < 0) {
+
+            try {
+                account.setBalance(b);
+            } catch (Exception e) {
+                System.out.println("Introduce un número válido");
+                e.printStackTrace();
+            } finally {
+                b = input.nextDouble();
+            }
+        }
+
+        Account account2 = account.clone();
+
+        System.out.println(account.hashCode() == account2.hashCode());
 
 
     }
