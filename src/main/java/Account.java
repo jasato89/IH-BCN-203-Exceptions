@@ -70,6 +70,8 @@ public class Account {
 
     @Override
     protected Account clone()  {
+        System.out.println("Hola");
+        System.out.println("Adios");
         return new Account(getName(), getAddress(), getBalance(), getAccountNumber());
     }
 
